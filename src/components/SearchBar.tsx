@@ -2,6 +2,7 @@
 import React, {useState, ChangeEvent} from "react";
 import {Input, InputGroup, InputRightElement} from "@chakra-ui/react";
 import {Search2Icon, SmallCloseIcon} from "@chakra-ui/icons";
+import {KeyboardEvent} from "react";
 
 import {INote} from "../interfaces/INote";
 
@@ -27,10 +28,10 @@ const SearchBar = ({notes, onSearch}: Props) => {
     setInputValue(e.target.value);
   };
 
-  const handleOnKeyPress = (event: KeyboardEvent): void => {
+  const handleOnKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (!inputValue.length) onSearch(notes);
 
-    if (event.key === "Enter") {
+    if (e.key === "Enter") {
       const filteredNotes = notes.filter(
         (note) =>
           note.title.toLowerCase().includes(inputValue.toLowerCase()) ||
